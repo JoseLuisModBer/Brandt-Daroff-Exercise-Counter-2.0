@@ -153,3 +153,23 @@ footer > p > a {
   color: #fff;
   text-align: center;
 }
+
+/*
+##################
+## INSTRUCTIONS ##
+##################
+*/
+
+#main-instructions {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.img-instructions {
+  width: 70%;
+}
