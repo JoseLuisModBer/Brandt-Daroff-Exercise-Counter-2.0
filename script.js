@@ -56,6 +56,9 @@ function startTimer() {
   isRunning = true;
   clearInterval(interval); // Detener el intervalo actual antes de iniciar uno nuevo
   interval = setInterval(updateTimer, 1000); // Establecer el intervalo para que se ejecute cada segundo
+
+  // Solicitar el bloqueo de pantalla para evitar que se apague automáticamente
+  requestWakeLock();
 }
 
 // Función para que funcione el conteo de números.
@@ -131,6 +134,24 @@ function updateTimer() {
       'El cronómetro ha llegado a los 10 minutos. Has finalizado el ejercicio.'
     );
   } */
+}
+
+// Solicitar el bloqueo de pantalla para evitar que se apague automáticamente
+function requestWakeLock() {
+  if ('wakeLock' in navigator) {
+    navigator.wakeLock
+      .request('screen')
+      .then(() => {
+        console.log('Bloqueo de pantalla activado.');
+      })
+      .catch((err) => {
+        console.error('No se pudo solicitar el bloqueo de pantalla:', err);
+      });
+  } else {
+    console.warn(
+      'La API Screen Wake Lock no es compatible con este navegador.'
+    );
+  }
 }
 
 // Función para reproducir un sonido. Se rebobina el sonido y se reproduce.
