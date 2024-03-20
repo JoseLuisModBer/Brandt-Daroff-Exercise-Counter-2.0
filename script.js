@@ -19,7 +19,7 @@ let isRunning = false;
 
 /* FUNCIONALIDAD BOTONES HEADER MENÚ */
 counterButton.addEventListener('click', function () {
-  window.location.href = './counter.html';
+  window.location.href = './index.html';
 });
 
 instructionsButton.addEventListener('click', function () {
