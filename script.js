@@ -104,7 +104,7 @@ function updateTimer() {
     console.log('Túmbate hacia la izquierda');
     playSound(soundIzda);
   } else if (
-    (minutes === 1 && seconds === 1) ||
+    (minutes === 1 && seconds === 0) ||
     (minutes === 3 && seconds === 0) ||
     (minutes === 5 && seconds === 0) ||
     (minutes === 7 && seconds === 0) ||
