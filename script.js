@@ -1,8 +1,11 @@
 /* VARIABLES */
 const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startBtn');
-const sound30 = document.getElementById('sound30');
-const soundMinute = document.getElementById('soundMinute');
+
+const soundIzda = document.getElementById('soundIzda');
+const soundDcha = document.getElementById('soundDcha');
+const soundSentado = document.getElementById('soundSentado');
+const soundFin = document.getElementById('soundFin');
 
 const counterButton = document.getElementById('counterButtonId');
 const instructionsButton = document.getElementById('instructionsButtonId');
@@ -79,34 +82,55 @@ function updateTimer() {
   // Revisamos el momento temporal para cargar las instrucciones apropiadas.
   if ((minutes === 0 || minutes % 2 === 0) && seconds < 30) {
     fotoSecundaria.src = './Medios/imagenes/tumbado-dcha.jpg';
+
     textoFotoSecundaria.textContent = 'Túmbate hacia tu izquierda.';
-  } else if (minutes % 2 !== 0 && seconds < 30) {
+  } else if (minutes % 2 !== 0 && seconds === 0) {
     fotoSecundaria.src = './Medios/imagenes/tumbado-izda.jpg';
     textoFotoSecundaria.textContent = 'Túmbate hacia tu derecha.';
-  } else {
+  } else if (seconds > 30) {
     fotoSecundaria.src = './Medios/imagenes/sentado.jpg';
     textoFotoSecundaria.textContent = 'Siéntate.';
   }
 
-  // Creamos un pitido para indicar que hay que sentarse
-  if (seconds === 30) {
-    console.log('Siéntate.');
-    /* playSound(sound30); */
-  }
+  const losMinutosSonPares = minutes % 2 === 0;
 
-  // Creamos un pitido para indicar que toca tumbarse
-  if (seconds === 0 && minutes > 0) {
-    console.log('Túmbate hacia un lado.');
-    /* playSound(soundMinute); */
-  }
-
-  // Revisamos si ha finalizado el ejercicio.
-  if (minutes === 10) {
+  if (
+    (minutes === 0 && seconds === 1) ||
+    (minutes === 2 && seconds === 0) ||
+    (minutes === 4 && seconds === 0) ||
+    (minutes === 6 && seconds === 0) ||
+    (minutes === 8 && seconds === 0)
+  ) {
+    console.log('Túmbate hacia la izquierda');
+    playSound(soundIzda);
+  } else if (
+    (minutes === 1 && seconds === 1) ||
+    (minutes === 3 && seconds === 0) ||
+    (minutes === 5 && seconds === 0) ||
+    (minutes === 7 && seconds === 0) ||
+    (minutes === 9 && seconds === 0)
+  ) {
+    console.log('Túmbate hacia la derecha');
+    playSound(soundDcha);
+  } else if (seconds === 30) {
+    console.log('Siéntate erguido');
+    playSound(soundSentado);
+  } else if (minutes === 10) {
+    playSound(soundFin);
     clearInterval(interval);
     alert(
       'El cronómetro ha llegado a los 10 minutos. Has finalizado el ejercicio.'
     );
   }
+
+  // Revisamos si ha finalizado el ejercicio.
+  /*   if (minutes === 10) {
+    playSound(soundFin);
+    clearInterval(interval);
+    alert(
+      'El cronómetro ha llegado a los 10 minutos. Has finalizado el ejercicio.'
+    );
+  } */
 }
 
 // Función para reproducir un sonido. Se rebobina el sonido y se reproduce.
