@@ -1,3 +1,11 @@
+/* FUNCIONALIDAD PARA EL AÑO DEL FOOTER */
+// Obtenemos el año actual (para la función de mostrarTodosCumpleanos)
+const hoy = new Date();
+const año = hoy.getFullYear();
+// Cargamos el año en el footer de las páginas html
+const añoFooter = document.getElementsByClassName('ano-footer')[0];
+añoFooter.innerHTML = año;
+
 /* VARIABLES */
 const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startBtn');
