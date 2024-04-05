@@ -165,6 +165,10 @@ footer > p > a {
   margin-right: 2rem;
 }
 
+#ol-instrucciones {
+  padding-left: 0px;
+}
+
 .img-container {
   display: flex;
   justify-content: center;
