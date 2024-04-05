@@ -2,7 +2,7 @@
 
 Brandt-Daroff Exercise Counter.
 
-- Visita el deployd del proyecto en [Netlify]().
+- Visita el deployd del proyecto en [Netlify](https://brandt-daroff-counter.netlify.app/).
 
 ## Índice
 
@@ -12,11 +12,13 @@ Brandt-Daroff Exercise Counter.
 
 ## Descripción
 
-- ...
+- Aplicación creada para ayudarte a realizar el ejercicio de prevención del vértigo de Brand-Daroff.
+- El desarrollo de esta aplicación surge de mi necesidad personal por tener una app útil y adaptada a la realización de dicho ejercicio.
+- Gracias a las instrucciones, imágenes explicativas y, sobre todo, a las indicaciones auditivas; realizar el ejercicio se vuelve mucho más fácil, cómodo e inclusivo.
 
 ## Lenguajes y tecnologías usadas
 
-- ...
+- Esta aplicación ha sido creada con Vanilla (HTML, CSS y JAVASCRIPT).
 
 ## Autor
 

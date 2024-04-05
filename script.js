@@ -6,7 +6,9 @@ const año = hoy.getFullYear();
 const añoFooter = document.getElementsByClassName('ano-footer')[0];
 añoFooter.innerHTML = año;
 
-/* VARIABLES */
+/*---------------------------------------------------------------------------*/
+
+/* DECLARACIÓN DE VARIABLES NECESARIAS */
 const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startBtn');
 
@@ -28,6 +30,8 @@ let hours = 0;
 let interval;
 let isRunning = false;
 
+/*---------------------------------------------------------------------------*/
+
 /* FUNCIONALIDAD BOTONES HEADER MENÚ */
 counterButton.addEventListener('click', function () {
   window.location.href = './index.html';
@@ -37,10 +41,12 @@ instructionsButton.addEventListener('click', function () {
   window.location.href = './instructions.html';
 });
 
-/* */
+/*---------------------------------------------------------------------------*/
+
+/* FUNCIÓN DEL BOTÓN DE START / RESET */
 function startOrResetTimer() {
   if (isRunning) {
-    // Si el cronómetro está en funcionamiento, detenerlo y reiniciar todo
+    // Si el cronómetro está en funcionamiento, detenerlo y reiniciar todo.
     clearInterval(interval);
     isRunning = false;
     seconds = 0;
@@ -51,25 +57,29 @@ function startOrResetTimer() {
     fotoSecundaria.src = './Medios/imagenes/sentado.jpg';
     textoFotoSecundaria.textContent = '';
   } else {
-    // Si el cronómetro no está en funcionamiento, iniciar
-    startButton.textContent = 'Reiniciar'; // Cambiar el texto del botón a "Reiniciar"
+    // Si el cronómetro no está en funcionamiento, iniciar el conteo.
+    startButton.textContent = 'Reiniciar';
     startTimer();
   }
 }
 
+/*---------------------------------------------------------------------------*/
+/* FUNCIÓN PARA INICIAR EL CONTEO Y MOSTRAR LOS PASOS */
 function startTimer() {
   contenedorDeEstados.classList.remove('doNotShow');
   contenedorDeEstados.classList.add('show');
   console.log('Se ha iniciado el ejercicio');
   isRunning = true;
-  clearInterval(interval); // Detener el intervalo actual antes de iniciar uno nuevo
-  interval = setInterval(updateTimer, 1000); // Establecer el intervalo para que se ejecute cada segundo
+  clearInterval(interval);
+  interval = setInterval(updateTimer, 1000);
 
-  // Solicitar el bloqueo de pantalla para evitar que se apague automáticamente
+  // Llamamos a la función que impide que la pantalla se apague.
   requestWakeLock();
 }
 
-// Función para que funcione el conteo de números.
+/*---------------------------------------------------------------------------*/
+
+/* FUNCIÓN PARA MANEJAR LA LÓGICA DEL CONTEO Y DEL CONTENIDO VISUAL */
 function updateTimer() {
   seconds++;
   if (seconds === 60) {
@@ -81,16 +91,16 @@ function updateTimer() {
     }
   }
 
-  // Función que agrega un 0 delante de los números menors que 10 para mantener formato 00
+  // Función que agrega un 0 delante de los números menores que 10 para mantener formato 00
   function pad(num) {
     return num < 10 ? `0${num}` : num;
   }
 
-  // Aquí actualizamos los números del contador
+  // Aquí se actualizan los números del contador
   const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   timerDisplay.textContent = formattedTime;
 
-  // Revisamos el momento temporal para cargar las instrucciones apropiadas.
+  // Revisamos el momento temporal para cargar las instrucciones e imágenes apropiadas.
   if ((minutes === 0 || minutes % 2 === 0) && seconds < 30) {
     fotoSecundaria.src = './Medios/imagenes/tumbado-dcha.jpg';
 
@@ -103,8 +113,8 @@ function updateTimer() {
     textoFotoSecundaria.textContent = 'Siéntate.';
   }
 
-  const losMinutosSonPares = minutes % 2 === 0;
-
+  /*   const losMinutosSonPares = minutes % 2 === 0; */
+  // Revisamos el momento temporal para cargar el audio con instrucciones adecuado.
   if (
     (minutes === 0 && seconds === 1) ||
     (minutes === 2 && seconds === 0) ||
@@ -133,18 +143,11 @@ function updateTimer() {
       'El cronómetro ha llegado a los 10 minutos. Has finalizado el ejercicio.'
     );
   }
-
-  // Revisamos si ha finalizado el ejercicio.
-  /*   if (minutes === 10) {
-    playSound(soundFin);
-    clearInterval(interval);
-    alert(
-      'El cronómetro ha llegado a los 10 minutos. Has finalizado el ejercicio.'
-    );
-  } */
 }
 
-// Solicitar el bloqueo de pantalla para evitar que se apague automáticamente
+/*---------------------------------------------------------------------------*/
+
+/* FUNCIÓN PARA EVITAR QUE LA PANTALLA SE APAGUE MIENTRAS LA APLICACIÓN ESTÉ ABIERTA */
 function requestWakeLock() {
   if ('wakeLock' in navigator) {
     navigator.wakeLock
@@ -162,10 +165,14 @@ function requestWakeLock() {
   }
 }
 
-// Función para reproducir un sonido. Se rebobina el sonido y se reproduce.
+/*---------------------------------------------------------------------------*/
+
+/* FUNCIÓN PARA REPRODUCIR UN SONIDO. SE REBOBINA EL SONIDO Y SE REPRODUCE */
 function playSound(sound) {
   sound.currentTime = 0;
   sound.play();
 }
+
+/*---------------------------------------------------------------------------*/
 
 startButton.addEventListener('click', startOrResetTimer);
